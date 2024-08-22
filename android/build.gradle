@@ -1,12 +1,16 @@
 apply plugin: 'com.android.library'
 
+def getExtOrDefault(name, defaultVal) {
+    return rootProject.ext.has(name) ? rootProject.ext.get(name) : defaultVal
+}
+
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion getExtOrDefault('compileSdkVersion', 25)
+    buildToolsVersion getExtOrDefault('buildToolsVersion', "25.0.2")
 
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 25
+        minSdkVersion getExtOrDefault('minSdkVersion', 16)
+        targetSdkVersion getExtOrDefault('targetSdkVersion', 25)
         versionCode 1
         versionName "1.0"
         ndk {
@@ -16,6 +20,6 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile "com.facebook.react:react-native:+"
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "com.facebook.react:react-native:+"
 }
